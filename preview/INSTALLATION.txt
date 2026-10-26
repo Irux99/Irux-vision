@@ -1,0 +1,16 @@
+IRUX VISION 0.1.0 - APERÇU
+
+Minecraft Java 1.21.11 + Fabric Loader 0.18.2 minimum + Java 21.
+Installer Fabric API 0.141.6+1.21.11.
+Mettre irux-vision-0.1.0.jar dans le dossier mods du profil.
+V : activer le HUD. Regarder une entité pour voir son modèle 3D.
+G maintenu : verrouiller. H : ACTION. Fin/End : STOP.
+P en visant un coffre/tonneau : autoriser ou révoquer le stockage.
+K : définir la zone de travail.
+
+Pour ACTION : Baritone Fabric 1.17.0 (Minecraft 1.21.11) est nécessaire.
+Ne pas doubler Baritone si Meteor le fournit déjà.
+
+Compilation et 8 tests de décision réussis.
+Version non encore validée en jeu; compatibilité Sodium/Iris/Meteor à vérifier.
+Caméra secondaire, scanner 3D de bases et X-Ray restent à développer.
