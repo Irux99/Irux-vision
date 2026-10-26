@@ -1,8 +1,8 @@
-IRUX VISION 0.3.0 — APERÇU JOUABLE
+IRUX VISION 0.3.1 — APERÇU JOUABLE
 
 Minecraft Java 1.21.11 / Java 21 / Fabric Loader 0.18.2 minimum.
 Fabric API : 0.141.6+1.21.11.
-Remplacer l’ancien JAR IRUX dans mods par irux-vision-0.3.0.jar.
+Remplacer l’ancien JAR IRUX dans mods par irux-vision-0.3.1.jar.
 Ne conserver qu’un JAR IRUX dans le profil.
 
 TOUCHES (configurables dans Options > Contrôles > IRUX VISION)
@@ -62,7 +62,18 @@ Archives locales : config/iruxvision/bases/*.irux.json.gz.
 Les blocs et leurs propriétés sont conservés; les contenus de coffres inconnus
 et les entités vivantes ne sont pas inventés dans une archive.
 
-COMPAGNONS ET ALERTES
+SCAN AUTO, COMPAGNONS ET ALERTES
+O > « Scan auto des entités » : activer/désactiver le scan automatique.
+Activé par défaut : les entités visibles sont reconnues sans toucher G et sans
+maintenir le viseur dessus. Une fois reconnues, elles restent suivies par UUID
+lorsqu’elles bougent ou quittent le viseur. Position et distance sont actualisées
+pendant leur chargement. Le profil reste affiché et les informations apparaissent
+sans attendre l’animation; cette animation ne redémarre pas à chaque mouvement.
+La case « Liste des entités scannées » masque uniquement la liste.
+Scan auto désactivé : G, les flèches et les verrous manuels restent disponibles.
+Mémoire de session : jusqu’à 512 contacts dans le monde courant. Hors chargement,
+LAST_KNOWN/SIGNAL_LOST signalent les données anciennes; l’UUID permet de reprendre
+le suivi au rechargement, même si le joueur regarde ailleurs.
 Un animal dont le propriétaire transmis est le joueur est indiqué ALLIÉ.
 Les verrous suivent son UUID et retrouvent ses données après rechargement.
 Hors chargement, les dernières données sont signalées LAST_KNOWN/SIGNAL_LOST.
@@ -77,7 +88,9 @@ Compilation et huit tests de décision, plus essai dans un vrai client 1.21.11 :
 commandes chat exactes sans zone proche/outils/graines, cible lointaine, flèches,
 verrous multiples, chien allié et reprise après déchargement/rechargement,
 redstone derrière un mur, X-Ray, curseur libéré, réglages, sélection 3D,
-sauvegarde/relecture, alerte creeper et STOP. Captures examinées.
+sauvegarde/relecture, alerte creeper et STOP. En plus en 0.3.1 : suivi d’une entité
+qui se déplace derrière le joueur sans nouveau scan, arrêt/reprise du scan auto,
+liste masquée indépendante du scan, et réacquisition hors champ. Captures examinées.
 Les vues utilisent les données reçues : chunks et entités jamais transmis
 restent indisponibles. Aucun contenu privé inconnu n’est inventé.
 Connexions redstone estimées par proximité, sans simulation complète.
@@ -87,4 +100,4 @@ reste à valider. Caméras encore expérimentales : ciel parfois noir et section
 temporairement incomplètes pendant le rechargement des chunks.
 Performances et éclairage à affiner selon le profil.
 
-SHA-256 du JAR : f007c0eb31b9581aea65d282d935d7c2d8d2e6aa7f5afc10f1765f78619fc640
+SHA-256 du JAR : 78202d14fe60a5f497717fd674628469d6e13144956ab9e55c24a67cefdd2cba
