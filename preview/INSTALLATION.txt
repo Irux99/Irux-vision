@@ -1,55 +1,90 @@
-IRUX VISION 0.2.0 — TACTICAL HUD
+IRUX VISION 0.3.0 — APERÇU JOUABLE
 
 Minecraft Java 1.21.11 / Java 21 / Fabric Loader 0.18.2 minimum.
 Fabric API : 0.141.6+1.21.11.
-Remplacer l’ancien JAR IRUX dans le dossier mods par irux-vision-0.2.0.jar.
+Remplacer l’ancien JAR IRUX dans mods par irux-vision-0.3.0.jar.
+Ne conserver qu’un JAR IRUX dans le profil.
 
+TOUCHES (configurables dans Options > Contrôles > IRUX VISION)
 V : activer/désactiver la vision.
-T, lorsque la vision est active : ouvrir le menu d’inspection 3D.
-T, lorsque la vision est désactivée : chat Minecraft habituel.
-G court : parcourir les entités connues à distance, même hors du viseur.
+H : ACTION, envoyer la commande du bloc visé dans le chat.
+Fin / End : STOP d’urgence, envoyer #stop, même dans une interface.
+G court : sélectionner l’entité en face du viseur parmi les entités chargées,
+sans limite de distance d’interaction et sans repli sur une entité sous le joueur.
 G maintenu 0,5 seconde : ajouter/retirer le verrouillage de la sélection.
-Jusqu’à 6 cibles verrouillées simultanément. Retour arrière : tout libérer.
-H : ACTION contextuelle. Fin / End : STOP d’urgence.
-P en visant un coffre/tonneau : autoriser/révoquer le stockage.
-K : définir une zone de travail.
-Toutes les touches sont configurables dans Options > Contrôles > IRUX VISION.
+Flèches haut/bas : cible précédente/suivante devant le joueur.
+Six verrouillages simultanés; Retour arrière : tout libérer.
+M : libérer la souris et ouvrir les raccourcis cliquables; M/Échap pour reprendre.
+O : réglages avec cases à cocher, taille du HUD et rayon du scanner.
+X : activer/désactiver le X-Ray de la vue principale.
+T, vision active : ouvrir l’inspection 3D; vision inactive : chat Minecraft.
+P / K : stockage autorisé / zone de l’ancien mode API facultatif.
 
-MENU 3D
-Clic gauche/glisser : orbite; clic court : sélectionner un bloc.
-Clic droit/glisser : déplacement; molette : zoom; R : réinitialiser.
+BARITONE ET ACTION
+Le mode par défaut envoie exactement, par exemple :
+  #mine minecraft:oak_log
+  #mine minecraft:diamond_ore
+  #farm (carottes, pommes de terre, autres cultures, verrue du Nether)
+  #stop
+L’identifiant exact utilise le tiret bas : oak_log, pas oak-log.
+Aucun contrôle IRUX de zone, d’outils ou de graines ne bloque cet envoi.
+Baritone exécute ensuite la commande avec ses propres options et limites.
+Son préfixe doit être #. Son aptitude à traiter la verrue du Nether dépend de
+sa version; IRUX envoie bien #farm pour cette culture.
+Installer Baritone Fabric compatible Minecraft 1.21.11 si nécessaire.
+Si Meteor fournit déjà Baritone, conserver une seule installation.
+L’ancien mode API reste accessible avec commandMode=false dans la configuration;
+ses zones et son dépôt agricole ne s’appliquent pas au mode chat par défaut.
+
+CAMÉRAS ET SCANNER
+Smart Camera et Base Overview sont des vues du monde Minecraft chargé,
+rendues par le moteur du jeu, avec leur propre caméra et leur propre visibilité.
+Elles ne partagent pas le rayon ou le budget de la reconstruction du scanner.
+L’option « Caméras à travers les murs » affiche aussi les entités et les
+circuits/conteneurs connus derrière les obstacles dans ces panneaux.
+Le X-Ray de la vue principale reste une option séparée, désactivée par défaut.
+Les entités et les blocs intéressants peuvent être masqués séparément.
+
+Seul Base Scanner utilise la reconstruction 3D inspectable : modèles texturés,
+coupes, terrain, transparence, sélection et vue éclatée. Sens de l’orbite et
+orientation des faces corrigés. Rayon initial 24 blocs, 4 096 positions par tick,
+12 000 modèles; circuits et conteneurs prioritaires, même derrière un mur.
+Le HUD démarre à 70 %; les panneaux se cochent/décochent dans O.
+
+MENU 3D ET BASES ENREGISTRÉES
+Glisser gauche : orbite; clic court : sélectionner un bloc.
+Glisser droit : déplacement; molette : zoom; R : réinitialiser.
 E : vue éclatée; T : terrain; F : filtre tout/conteneurs/redstone.
-Les boutons permettent les coupes en hauteur et la transparence.
-Échap : fermer le menu. L’ouverture du menu arrête l’automatisation.
+Les boutons permettent les coupes et la transparence.
+Nommer/sauver : ouvrir la bibliothèque, donner un nom puis enregistrer.
+La bibliothèque permet de rouvrir les bases sauvegardées.
+Archives locales : config/iruxvision/bases/*.irux.json.gz.
+Les blocs et leurs propriétés sont conservés; les contenus de coffres inconnus
+et les entités vivantes ne sont pas inventés dans une archive.
 
-DÉTECTION ET COMPAGNONS
-Les entités visibles dans le champ de vision sont détectées sans les viser.
-Le regard direct affiche davantage de données et leur environnement reconstruit.
-Un animal dont le propriétaire transmis est le joueur est affiché comme ALLIÉ.
-Les verrouillages suivent l’UUID et retrouvent automatiquement l’entité rechargée.
-Les données indisponibles restent LAST_KNOWN puis SIGNAL_LOST.
+COMPAGNONS ET ALERTES
+Un animal dont le propriétaire transmis est le joueur est indiqué ALLIÉ.
+Les verrous suivent son UUID et retrouvent ses données après rechargement.
+Hors chargement, les dernières données sont signalées LAST_KNOWN/SIGNAL_LOST.
+Des sons courts accompagnent activation, scan, sélection/verrouillage, ACTION et STOP.
+Un creeper connu du client à moins de 16 blocs qui commence son amorçage déclenche une
+notification rouge avec sa distance et un double signal sonore, même hors du viseur.
+L’alerte cesse si l’amorçage s’arrête ou si le creeper n’est plus proche/chargé.
+Cases séparées : « Sons IRUX » et « Alertes creepers proches ».
 
-BARITONE OPTIONNEL
-Pour ACTION, installer Baritone Fabric 1.17.0 pour Minecraft 1.21.11.
-Si Meteor fournit déjà Baritone, garder une seule installation.
-Le minerai visé est transmis à IMineProcess.mineByName : par exemple diamond_ore
-équivaut à #mine minecraft:diamond_ore, sans commande à saisir.
-Les fermes utilisent IFarmProcess.farm, avec récolte, plantation et poudre d’os.
-Les arrêts de sécurité, limites de déplacement et protections d’outils restent actifs.
-
-VUES ET LIMITES
-HUD inspiré de la référence : cadres découpés orange/rouge, modèles réels,
-équipement, scanner local, maquette, mécanismes redstone et inspection 3D.
-Smart Camera est une reconstruction 3D locale des données client, sans rendu
-complet du monde ni shaders dans cette vue. Le contenu inconnu des conteneurs
-n’est pas inventé; les connexions des circuits sont estimées par proximité.
+VALIDATION ET LIMITES
+Compilation et huit tests de décision, plus essai dans un vrai client 1.21.11 :
+commandes chat exactes sans zone proche/outils/graines, cible lointaine, flèches,
+verrous multiples, chien allié et reprise après déchargement/rechargement,
+redstone derrière un mur, X-Ray, curseur libéré, réglages, sélection 3D,
+sauvegarde/relecture, alerte creeper et STOP. Captures examinées.
+Les vues utilisent les données reçues : chunks et entités jamais transmis
+restent indisponibles. Aucun contenu privé inconnu n’est inventé.
+Connexions redstone estimées par proximité, sans simulation complète.
 Compatibilité Sodium, Iris/shaders et Meteor encore à vérifier.
+L’envoi chat est testé; l’exécution avec une installation Baritone externe
+reste à valider. Caméras encore expérimentales : ciel parfois noir et sections
+temporairement incomplètes pendant le rechargement des chunks.
+Performances et éclairage à affiner selon le profil.
 
-VALIDATION
-Compilation et 8 tests de décision réussis.
-Essais en jeu réussis : scan sans visée, multi-ciblage, chien allié et reprise
-des données après déchargement/rechargement, menu T et chat hors vision,
-sélection d’un coffre en 3D, vue éclatée et STOP.
-Baritone installé et compatibilité avec les autres mods restent à valider.
-
-SHA-256 du JAR : e14b38b712d04f6eaa5aa68a0af1c0fce773050f12bec2e89c97a4907db52e08
+SHA-256 du JAR : f007c0eb31b9581aea65d282d935d7c2d8d2e6aa7f5afc10f1765f78619fc640
