@@ -1,16 +1,55 @@
-IRUX VISION 0.1.0 - APERÇU
+IRUX VISION 0.2.0 — TACTICAL HUD
 
-Minecraft Java 1.21.11 + Fabric Loader 0.18.2 minimum + Java 21.
-Installer Fabric API 0.141.6+1.21.11.
-Mettre irux-vision-0.1.0.jar dans le dossier mods du profil.
-V : activer le HUD. Regarder une entité pour voir son modèle 3D.
-G maintenu : verrouiller. H : ACTION. Fin/End : STOP.
-P en visant un coffre/tonneau : autoriser ou révoquer le stockage.
-K : définir la zone de travail.
+Minecraft Java 1.21.11 / Java 21 / Fabric Loader 0.18.2 minimum.
+Fabric API : 0.141.6+1.21.11.
+Remplacer l’ancien JAR IRUX dans le dossier mods par irux-vision-0.2.0.jar.
 
-Pour ACTION : Baritone Fabric 1.17.0 (Minecraft 1.21.11) est nécessaire.
-Ne pas doubler Baritone si Meteor le fournit déjà.
+V : activer/désactiver la vision.
+T, lorsque la vision est active : ouvrir le menu d’inspection 3D.
+T, lorsque la vision est désactivée : chat Minecraft habituel.
+G court : parcourir les entités connues à distance, même hors du viseur.
+G maintenu 0,5 seconde : ajouter/retirer le verrouillage de la sélection.
+Jusqu’à 6 cibles verrouillées simultanément. Retour arrière : tout libérer.
+H : ACTION contextuelle. Fin / End : STOP d’urgence.
+P en visant un coffre/tonneau : autoriser/révoquer le stockage.
+K : définir une zone de travail.
+Toutes les touches sont configurables dans Options > Contrôles > IRUX VISION.
 
+MENU 3D
+Clic gauche/glisser : orbite; clic court : sélectionner un bloc.
+Clic droit/glisser : déplacement; molette : zoom; R : réinitialiser.
+E : vue éclatée; T : terrain; F : filtre tout/conteneurs/redstone.
+Les boutons permettent les coupes en hauteur et la transparence.
+Échap : fermer le menu. L’ouverture du menu arrête l’automatisation.
+
+DÉTECTION ET COMPAGNONS
+Les entités visibles dans le champ de vision sont détectées sans les viser.
+Le regard direct affiche davantage de données et leur environnement reconstruit.
+Un animal dont le propriétaire transmis est le joueur est affiché comme ALLIÉ.
+Les verrouillages suivent l’UUID et retrouvent automatiquement l’entité rechargée.
+Les données indisponibles restent LAST_KNOWN puis SIGNAL_LOST.
+
+BARITONE OPTIONNEL
+Pour ACTION, installer Baritone Fabric 1.17.0 pour Minecraft 1.21.11.
+Si Meteor fournit déjà Baritone, garder une seule installation.
+Le minerai visé est transmis à IMineProcess.mineByName : par exemple diamond_ore
+équivaut à #mine minecraft:diamond_ore, sans commande à saisir.
+Les fermes utilisent IFarmProcess.farm, avec récolte, plantation et poudre d’os.
+Les arrêts de sécurité, limites de déplacement et protections d’outils restent actifs.
+
+VUES ET LIMITES
+HUD inspiré de la référence : cadres découpés orange/rouge, modèles réels,
+équipement, scanner local, maquette, mécanismes redstone et inspection 3D.
+Smart Camera est une reconstruction 3D locale des données client, sans rendu
+complet du monde ni shaders dans cette vue. Le contenu inconnu des conteneurs
+n’est pas inventé; les connexions des circuits sont estimées par proximité.
+Compatibilité Sodium, Iris/shaders et Meteor encore à vérifier.
+
+VALIDATION
 Compilation et 8 tests de décision réussis.
-Version non encore validée en jeu; compatibilité Sodium/Iris/Meteor à vérifier.
-Caméra secondaire, scanner 3D de bases et X-Ray restent à développer.
+Essais en jeu réussis : scan sans visée, multi-ciblage, chien allié et reprise
+des données après déchargement/rechargement, menu T et chat hors vision,
+sélection d’un coffre en 3D, vue éclatée et STOP.
+Baritone installé et compatibilité avec les autres mods restent à valider.
+
+SHA-256 du JAR : e14b38b712d04f6eaa5aa68a0af1c0fce773050f12bec2e89c97a4907db52e08
